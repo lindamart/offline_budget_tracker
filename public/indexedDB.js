@@ -1,6 +1,6 @@
 // sample code
 
-export function checkForIndexedDb() {
+function checkForIndexedDb() {
     if (!window.indexedDB) {
         console.log("Your browser doesn't support a stable version of IndexedDB.");
         return false;
@@ -8,7 +8,7 @@ export function checkForIndexedDb() {
     return true;
 }
 
-export function useIndexedDb(databaseName, storeName, method, object) {
+function useIndexedDb(databaseName, storeName, method, object) {
     return new Promise((resolve, reject) => {
         const request = window.indexedDB.open(databaseName, 1);
         let db,
@@ -48,16 +48,8 @@ export function useIndexedDb(databaseName, storeName, method, object) {
         };
     });
 }
-export const saveRecord = (record) => {
-    console.log('Save record invoked');
-    // Create a transaction on the BudgetStore db with readwrite access
-    const transaction = db.transaction(['BudgetStore'], 'readwrite');
-
-    // Access your BudgetStore object store
-    const store = transaction.objectStore('BudgetStore');
-
-    // Add record to your store with add method.
-    store.add(record);
+function saveRecord(record){
+    useIndexedDb("budgetNameDB", "transaction", "put", {...record,_id:Math.floor(Math.random()*10000)});
 };
 
 // Listen for app coming back online

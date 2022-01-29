@@ -53,7 +53,7 @@ self.addEventListener('fetch', (event) => {
                 if (cachedResponse) {
                     return cachedResponse;
                 }
-
+                // /api/transaction/bulk
                 return caches.open(RUNTIME).then((cache) => {
                     
                     return fetch(event.request).then((response) => {
