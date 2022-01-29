@@ -1,11 +1,12 @@
 const FILES_TO_CACHE = [
     '/',
     '/index.html',
-    '/public/style.css',
-    '/dist/app.bundle.js???',
+    '/style.css',
+    '/indexedDB.js',
     '/manifest.json',
     '/icons/icon-192x192.png',
     '/icons/icon-512x512.png'
+
 ];
 // update with correct info below --------------------------------------------------
 const PRECACHE = 'precache-v1';
@@ -15,9 +16,14 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
             .open(PRECACHE)
-            .then((cache) => cache.addAll(FILES_TO_CACHE))
-            .then(self.skipWaiting())
+            .then((cache) => {
+                console.log("Files were precached successfully", caches, FILES_TO_CACHE)
+            let cachedAll = cache.addAll(FILES_TO_CACHE)
+            return cachedAll;
+            })
+
     );
+    self.skipWaiting();
 });
 
 // The activate handler takes care of cleaning up old caches.
@@ -39,7 +45,7 @@ self.addEventListener('activate', (event) => {
             .then(() => self.clients.claim())
     );
 });
-
+// look into this
 self.addEventListener('fetch', (event) => {
     if (event.request.url.startsWith(self.location.origin)) {
         event.respondWith(
@@ -49,6 +55,7 @@ self.addEventListener('fetch', (event) => {
                 }
 
                 return caches.open(RUNTIME).then((cache) => {
+                    
                     return fetch(event.request).then((response) => {
                         return cache.put(event.request, response.clone()).then(() => {
                             return response;

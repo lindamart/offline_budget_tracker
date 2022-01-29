@@ -15,7 +15,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    // is this right for URL?
     "start_url": "/",
     "display": "standalone"
 }
