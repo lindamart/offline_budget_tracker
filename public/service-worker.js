@@ -8,7 +8,6 @@ const FILES_TO_CACHE = [
     '/icons/icon-512x512.png'
 
 ];
-// update with correct info below --------------------------------------------------
 const PRECACHE = 'precache-v1';
 const RUNTIME = 'runtime';
 
@@ -46,7 +45,7 @@ self.addEventListener('activate', (event) => {
             .then(() => self.clients.claim())
     );
 });
-// look into this
+
 self.addEventListener('fetch', (event) => {
     if (event.request.method !== "GET" || !event.request.url.startsWith(self.location.origin)) {
         event.respondWith(fetch(event.request))
