@@ -17,13 +17,14 @@ self.addEventListener('install', (event) => {
         caches
             .open(PRECACHE)
             .then((cache) => {
+                let cachedAll = cache.addAll(FILES_TO_CACHE)
                 console.log("Files were precached successfully", caches, FILES_TO_CACHE)
-            let cachedAll = cache.addAll(FILES_TO_CACHE)
-            return cachedAll;
+                return cachedAll;
             })
-
+            .then(()=>{
+                self.skipWaiting();
+            })
     );
-    self.skipWaiting();
 });
 
 // The activate handler takes care of cleaning up old caches.
@@ -47,22 +48,39 @@ self.addEventListener('activate', (event) => {
 });
 // look into this
 self.addEventListener('fetch', (event) => {
-    if (event.request.url.startsWith(self.location.origin)) {
-        event.respondWith(
-            caches.match(event.request).then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-                // /api/transaction/bulk
-                return caches.open(RUNTIME).then((cache) => {
-                    
-                    return fetch(event.request).then((response) => {
-                        return cache.put(event.request, response.clone()).then(() => {
-                            return response;
-                        });
-                    });
-                });
-            })
-        );
+    if (event.request.method !== "GET" || !event.request.url.startsWith(self.location.origin)) {
+        event.respondWith(fetch(event.request))
+        return
     }
+
+    if (event.request.url.includes("/api/transaction")) {
+        event.respondWith(
+            caches.open(RUNTIME).then((cache) => {
+                return fetch(event.request)
+                    .then((response) => {
+                        cache.put(event.request, response.clone())
+                        return response
+                    })
+                    .catch(() => {
+                        return caches.match(event.request)
+                    })
+            })
+        )
+        return
+    }
+
+    event.respondWith(
+        caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+                return cachedResponse
+            }
+
+            return caches.open(RUNTIME).then((cache) => {
+                return fetch(event.request).then((response) => {
+                    cache.put(event.request, response.clone())
+                    return response
+                })
+            })
+        })
+    )
 });
