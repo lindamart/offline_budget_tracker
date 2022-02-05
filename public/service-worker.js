@@ -47,11 +47,12 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+    // if not GET forward off
     if (event.request.method !== "GET" || !event.request.url.startsWith(self.location.origin)) {
         event.respondWith(fetch(event.request))
         return
     }
-
+// GET request sent to api/transaction >> if succeeds cache >> if fail get last cached list and return
     if (event.request.url.includes("/api/transaction")) {
         event.respondWith(
             caches.open(RUNTIME).then((cache) => {
