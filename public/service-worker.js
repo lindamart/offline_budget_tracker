@@ -11,6 +11,7 @@ const FILES_TO_CACHE = [
 const PRECACHE = 'precache-v1';
 const RUNTIME = 'runtime';
 
+// Precache and notify
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
@@ -20,7 +21,7 @@ self.addEventListener('install', (event) => {
                 console.log("Files were precached successfully", caches, FILES_TO_CACHE)
                 return cachedAll;
             })
-            .then(()=>{
+            .then(() => {
                 self.skipWaiting();
             })
     );
@@ -52,7 +53,7 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(fetch(event.request))
         return
     }
-// GET request sent to api/transaction >> if succeeds cache >> if fail get last cached list and return
+    // GET request sent to api/transaction >> if succeeds cache >> if fail get last cached list and return
     if (event.request.url.includes("/api/transaction")) {
         event.respondWith(
             caches.open(RUNTIME).then((cache) => {
@@ -68,7 +69,7 @@ self.addEventListener('fetch', (event) => {
         )
         return
     }
-
+// GET request from other source and cache
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             if (cachedResponse) {
