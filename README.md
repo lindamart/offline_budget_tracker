@@ -1,14 +1,24 @@
 # Offline Budget Tracker
 
 Overview:  
+For this project functionality was added to an existing Budget Tracker application to allow for offline access and functionality.  This allowes the user to be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they populate the total when brought back online.
 
+<!-- Offline Functionality:
+
+  * Enter deposits offline
+
+  * Enter expenses offline
+
+When brought back online:
+
+  * Offline entries should be added to tracker. -->
 # Links
 
 ### Website link 
-
+https://pwaoffline-budget-tracker.herokuapp.com/
 
 ### GitHub Link
-
+https://github.com/lindamart/offline_budget_tracker
 
 
 # Table of Contents 
