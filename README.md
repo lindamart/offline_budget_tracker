@@ -41,7 +41,7 @@ https://github.com/lindamart/offline_budget_tracker
 
 # Build Criteria
 
-- WHEN the user inputs a withdrawal or deposit THEN that will be shown on the page, and added to their transaction history when their connection is back online.
+- When the user inputs a withdrawal or deposit then that will be shown on the page, and added to their transaction history when their connection is back online.
 
 - The transaction history should be replayed in order.
 
@@ -60,11 +60,13 @@ Linda Martinez [lindanmjw@gmail.com](mailto:lindanmjw@gmail.com)
 
 # Credits 
 
-MongoDB: https://docs.atlas.mongodb.com/
+MongoDB Atlas: https://docs.atlas.mongodb.com/
 
 Mongoose: https://mongoosejs.com/
 
 MDN: https://developer.mozilla.org/en-US
+
+W3 Schools: https://www.w3schools.com/
 
 Heroku: https://dashboard.heroku.com/apps
 
