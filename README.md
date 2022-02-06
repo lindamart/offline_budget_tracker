@@ -2,7 +2,7 @@
 
 Overview:  
 
-For this project functionality was added to an existing Budget Tracker application to allow a fast and easy way to track their money at all times.  Adding offline access which allowes a user to be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they populate the total when brought back online.
+For this project functionality was added to an existing Budget Tracker application to allow a fast and easy way for a user to track their money at all times.  The code updates were focused on adding offline access which enables a user to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they populate the total when brought back online.
 
 # Links
 
