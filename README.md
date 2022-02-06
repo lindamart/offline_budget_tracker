@@ -28,7 +28,7 @@ https://github.com/lindamart/offline_budget_tracker
 
 
 # Preview
-### Add a workout
+### Application Functionalities 
 ![](photo.jpg)
 - Ability to add and subtract funds while Online
 
@@ -40,7 +40,7 @@ https://github.com/lindamart/offline_budget_tracker
 
 
 # Build Criteria
-
+```
 - When the user inputs a withdrawal or deposit then that will be shown on the page, and added to their transaction history when their connection is back online.
 
 - The transaction history should be replayed in order.
@@ -50,7 +50,7 @@ https://github.com/lindamart/offline_budget_tracker
 - If the server is up, the current transactions should still be sent to the server without being added to the failure cache.
 
 - The initial list of cache_files should include all static assets.
-
+```
 # Contact Me
 
 Contact me with any questions.
